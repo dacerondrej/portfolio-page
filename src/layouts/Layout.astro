@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+
+const title = "Ondřej Dacer — Frontend Developer";
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Dark mode toggle
+      const html = document.documentElement;
+
+      const getTheme = (): "dark" | "light" => {
+        const stored = localStorage.getItem("theme");
+        if (stored === "light" || stored === "dark") return stored;
+        return "dark";
+      };
+
+      const applyTheme = (theme: "dark" | "light") => {
+        if (theme === "dark") {
+          html.classList.add("dark");
+        } else {
+          html.classList.remove("dark");
+        }
+        localStorage.setItem("theme", theme);
+
+        const btn = document.getElementById("theme-toggle");
+        if (btn) {
+          btn.setAttribute(
+            "aria-label",
+            theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+          );
+          btn.setAttribute("data-theme", theme);
+        }
+      };
+
+      applyTheme(getTheme());
+
+      document.addEventListener("DOMContentLoaded", () => {
+        applyTheme(getTheme());
+
+        document
+          .getElementById("theme-toggle")
+          ?.addEventListener("click", () => {
+            const current = html.classList.contains("dark") ? "dark" : "light";
+            applyTheme(current === "dark" ? "light" : "dark");
+          });
+      });
+
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>
