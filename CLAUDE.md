@@ -54,3 +54,4 @@ bunx prettier --write src/
 - Sections are individual Astro components composed in `src/pages/index.astro`
 - Tailwind dark mode strategy: `class` (toggled via JS on `<html>`)
 - Keep components small and focused — one section per file
+- TypeScript: prefer `type` over `interface`; use ES6 arrow function syntax

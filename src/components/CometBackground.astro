@@ -1,0 +1,109 @@
+<canvas id="comet-canvas" aria-hidden="true"></canvas>
+
+<style>
+  #comet-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById("comet-canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d")!;
+
+  const COMET_COUNT = 8;
+  const TAIL_LENGTH = 80;
+  const SPEED_MIN = 2;
+  const SPEED_MAX = 5;
+  const ANGLE = Math.PI / 5; // ~36° — comets travel down-right
+
+  type Comet = {
+    x: number;
+    y: number;
+    speed: number;
+    length: number;
+    alpha: number;
+    size: number;
+  };
+
+  const spawnComet = (): Comet => {
+    // Start along the top edge or the left edge
+    const startOnTop = Math.random() < 0.6;
+    const x = startOnTop ? Math.random() * canvas.width : -Math.random() * 200;
+    const y = startOnTop ? -20 : Math.random() * canvas.height * 0.5;
+    return {
+      x,
+      y,
+      speed: SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN),
+      length: TAIL_LENGTH * (0.5 + Math.random() * 0.8),
+      alpha: 0.4 + Math.random() * 0.5,
+      size: 1 + Math.random() * 1.5,
+    };
+  };
+
+  const isOffScreen = (c: Comet) => c.x > canvas.width + c.length * 2 || c.y > canvas.height + c.length * 2;
+
+  const resize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  const comets: Comet[] = Array.from({ length: COMET_COUNT }, () => {
+    const c = spawnComet();
+    // Scatter initial positions so they don't all start at once
+    c.x += Math.random() * canvas.width;
+    c.y += Math.random() * canvas.height * 0.4;
+    return c;
+  });
+
+  const dx = Math.cos(ANGLE);
+  const dy = Math.sin(ANGLE);
+
+  const draw = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const headColor = "62,207,142"; // mint #3ECF8E
+
+    for (const c of comets) {
+      const tailX = c.x - dx * c.length;
+      const tailY = c.y - dy * c.length;
+
+      const grad = ctx.createLinearGradient(tailX, tailY, c.x, c.y);
+      grad.addColorStop(0, `rgba(${headColor},0)`);
+      grad.addColorStop(1, `rgba(${headColor},${c.alpha})`);
+
+      ctx.beginPath();
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(c.x, c.y);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = c.size;
+      ctx.lineCap = "round";
+      ctx.stroke();
+
+      // Bright head dot
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.size * 0.8, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${headColor},${c.alpha})`;
+      ctx.fill();
+
+      // Advance
+      c.x += dx * c.speed;
+      c.y += dy * c.speed;
+
+      if (isOffScreen(c)) {
+        Object.assign(c, spawnComet());
+      }
+    }
+
+    requestAnimationFrame(draw);
+  };
+
+  draw();
+</script>
