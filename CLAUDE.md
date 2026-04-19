@@ -1,17 +1,19 @@
 # Portfolio Page — CLAUDE.md
 
 ## Project Overview
+
 A personal portfolio page for a frontend developer. Single-page site with smooth scrolling sections.
 
 ## Tech Stack
+
 - **Framework:** Astro
 - **Styling:** Tailwind CSS
 - **Language:** TypeScript (minimal, only where helpful)
 - **Package manager:** Bun
-- **Linter:** oxlint
-- **Formatter:** oxfmt
+- **Formatter:** Prettier (with `prettier-plugin-astro`), print width 140
 
 ## Design Guidelines
+
 - Minimalistic and clean aesthetic
 - **Dark mode by default**, light mode toggle
 - Accent color: menthol/mint (approx. `#3EB489` or similar — confirm with user)
@@ -20,6 +22,7 @@ A personal portfolio page for a frontend developer. Single-page site with smooth
 - No unnecessary decorative clutter — animations should feel purposeful and elegant
 
 ## Page Structure (single page)
+
 1. **Navbar** — minimal, top of page, links to sections
 2. **About** — short personal intro
 3. **Work Experience** — jobs with project descriptions
@@ -27,6 +30,7 @@ A personal portfolio page for a frontend developer. Single-page site with smooth
 5. **Contact** — way to reach the developer
 
 ## Commands
+
 ```bash
 # Install dependencies
 bun install
@@ -40,14 +44,12 @@ bun run build
 # Preview production build
 bun run preview
 
-# Lint
-bunx oxlint
-
 # Format
-bunx oxfmt
+bunx prettier --write src/
 ```
 
 ## Conventions
+
 - All components live in `src/components/`
 - Sections are individual Astro components composed in `src/pages/index.astro`
 - Tailwind dark mode strategy: `class` (toggled via JS on `<html>`)

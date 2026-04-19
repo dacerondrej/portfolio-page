@@ -5,37 +5,32 @@ const jobs = [
     role: "Medior Frontend Developer",
     period: "Jul 2024 — Present",
     description:
-      "Since July 2024, I have been contributing to the development of O2's main sales application. This role introduced me to SCRUM in a real-world environment and expanded my technical toolkit — most notably with TanStack Query for server state management.",
-    tags: [
-      "React",
-      "TypeScript",
-      "Tanstack Query",
-      "Playwright",
-      "SCRUM",
-      "JIRA",
-    ],
+      "Since July 2024, I have been contributing to the development of O2's main sales application. " +
+      "This role introduced me to SCRUM in a real-world environment and expanded my technical toolkit — " +
+      "most notably with TanStack Query for server state management.",
+    tags: ["React", "TypeScript", "Tanstack Query", "Playwright", "SCRUM", "JIRA"],
   },
   {
     company: "BIXION",
     role: "Medior Frontend Developer",
     period: "Aug 2021 — Present",
     description:
-      "Through connections from my time at Brno University of Technology, I joined BIXION — a Czech startup founded by two passionate engineers that delivers time-lapse solutions worldwide. I wrote both my bachelor's and master's theses here. For my bachelor's thesis I built a management interface for their time-lapse systems in React and JavaScript with Material UI. Over time, dissatisfaction with that codebase and growing requirements led me to rebuild the entire application from scratch — this time with TypeScript, shadcn/ui, and Tailwind. I'm much prouder of what it became. Working alongside one colleague, with full freedom over the tech stack, I've also had the chance to experiment with tools like Biome, Bun, and oxc.",
-    tags: [
-      "React",
-      "TypeScript",
-      "Websockets",
-      "Material UI",
-      "shadcn/ui",
-      "Tailwind",
-    ],
+      "Through connections from my time at Brno University of Technology, I joined BIXION — a Czech startup founded by two passionate engineers " +
+      "that delivers time-lapse solutions worldwide. I wrote both my bachelor's and master's theses here. " +
+      "For my bachelor's thesis I built a management interface for their time-lapse systems in React and JavaScript with Material UI. " +
+      "Over time, dissatisfaction with that codebase and growing requirements led me to rebuild the entire application from scratch — " +
+      "this time with TypeScript, shadcn/ui, and Tailwind. I'm much prouder of what it became. " +
+      "Working alongside one colleague, with full freedom over the tech stack, I've also had the chance to experiment with tools like Biome, Bun, and oxc.",
+    tags: ["React", "TypeScript", "Websockets", "Material UI", "shadcn/ui", "Tailwind"],
   },
   {
     company: "RACOM",
     role: "Junior Frontend Developer",
     period: "Aug 2022 — Jun 2024",
     description:
-      "RACOM is a company from my hometown with global reach, specializing in wireless data transmission technology for critical infrastructure. I worked on the user interface for administering their devices — a project where I got my first hands-on experience with Playwright and a sophisticated design system built on the open-source react-ui library, to which I also contributed a few commits.",
+      "RACOM is a company from my hometown with global reach, specializing in wireless data transmission technology for critical infrastructure. " +
+      "I worked on the user interface for administering their devices — a project where I got my first hands-on experience with Playwright " +
+      "and a sophisticated design system built on the open-source react-ui library, to which I also contributed a few commits.",
     tags: ["React", "TypeScript", "Playwright"],
   },
   {
@@ -43,7 +38,9 @@ const jobs = [
     role: "Junior Frontend Developer",
     period: "Jul 2018 — Oct 2022",
     description:
-      "Strong academic results in my first semester earned me the opportunity to work directly within the faculty at Brno University of Technology. I came in with a foundation in HTML, CSS, and JavaScript from high school, but this is where I first encountered React — and I've been working with it ever since. Class components, mercifully, are behind us.",
+      "Strong academic results in my first semester earned me the opportunity to work directly within the faculty at Brno University of Technology. " +
+      "I came in with a foundation in HTML, CSS, and JavaScript from high school, but this is where I first encountered React — " +
+      "and I've been working with it ever since. Class components, mercifully, are behind us.",
     tags: ["JavaScript", "React", "Material UI", "SCSS"],
   },
 ];
@@ -52,12 +49,8 @@ const jobs = [
 <section id="experience" class="py-24">
   <div class="max-w-4xl mx-auto px-6">
     <div class="reveal">
-      <p class="text-sm font-medium text-mint mb-2 tracking-widest uppercase">
-        Experience
-      </p>
-      <h2 class="text-3xl font-semibold text-zinc-900 dark:text-zinc-100 mb-16">
-        Where I've worked
-      </h2>
+      <p class="text-sm font-medium text-mint mb-2 tracking-widest uppercase">Experience</p>
+      <h2 class="text-3xl font-semibold text-zinc-900 dark:text-zinc-100 mb-16">Where I've worked</h2>
     </div>
 
     <div class="space-y-12">
@@ -65,9 +58,7 @@ const jobs = [
         jobs.map((job, i) => (
           <div class={`reveal reveal-delay-${(i % 4) + 1} flex gap-8 group`}>
             <div class="hidden sm:block pt-1 w-36 shrink-0 text-right">
-              <span class="text-xs text-zinc-500 tabular-nums">
-                {job.period}
-              </span>
+              <span class="text-xs text-zinc-500 tabular-nums">{job.period}</span>
             </div>
             <div class="flex gap-4">
               <div class="flex flex-col items-center">
@@ -76,20 +67,12 @@ const jobs = [
               </div>
               <div class="pb-12">
                 <p class="sm:hidden text-xs text-zinc-500 mb-1">{job.period}</p>
-                <p class="text-xs text-zinc-500 font-medium uppercase tracking-wider mb-1">
-                  {job.company}
-                </p>
-                <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-3">
-                  {job.role}
-                </h3>
-                <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">
-                  {job.description}
-                </p>
+                <p class="text-xs text-zinc-500 font-medium uppercase tracking-wider mb-1">{job.company}</p>
+                <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-3">{job.role}</h3>
+                <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">{job.description}</p>
                 <div class="flex flex-wrap gap-2">
                   {job.tags.map((tag) => (
-                    <span class="px-2.5 py-1 text-xs font-medium text-mint bg-zinc-100 dark:bg-zinc-900 rounded-md">
-                      {tag}
-                    </span>
+                    <span class="px-2.5 py-1 text-xs font-medium text-mint bg-zinc-100 dark:bg-zinc-900 rounded-md">{tag}</span>
                   ))}
                 </div>
               </div>
